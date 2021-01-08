@@ -60,8 +60,15 @@ group by stadium;
 SELECT matchid, mdate, count(player)
   FROM game JOIN goal ON matchid = id 
  WHERE (team1 = 'POL' OR team2 = 'POL')
+group by matchid, mdate;
+
+#12. For every match where 'GER' scored, show matchid, match date and the number of goals scored by 'GER'
+
+select matchid, mdate, count(player)
+from goal join game on id = matchid
+where teamid = 'GER'
 group by matchid, mdate
 
 
-    
+
 
