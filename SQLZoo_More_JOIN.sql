@@ -75,8 +75,31 @@ WHERE name='Rock Hudson'
 GROUP BY yr
 HAVING COUNT(title) > 2;
 
+#12. List the film title and the leading actor for all of the films 'Julie Andrews' played in.
+
+select title, name 
+from casting join movie on (casting.movieid = movie.id AND ord = 1)
+join actor on (casting.actorid = actor.id)
+where movie.id in (select movieid from casting where actorid in (select id from actor where name = 'Julie Andrews'));
 
 
+#13. Obtain a list, in alphabetical order, of actors who've had at least 15 starring roles.
+
+select name
+from casting 
+join actor on casting.actorid = actor.id
+where casting.ord = 1
+group by name
+HAVING COUNT(*) >= 15;
+
+#14. List the films released in the year 1978 ordered by the number of actors in the cast, then by title.
+
+select title, count(actorid)
+from casting
+join movie on casting.movieid = movie.id
+where yr = 1978
+group by title
+order by count(actorid) DESC, title;
 
 
 
